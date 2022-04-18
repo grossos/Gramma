@@ -41,8 +41,11 @@
             this.gChannelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bChannelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convertToGrayscaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.erosionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dilationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chromaticModelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rGBToYCbYCrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yCbYrToRGBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.binarizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +57,6 @@
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.yCbYrToRGBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -113,7 +115,9 @@
             this.rChannelToolStripMenuItem,
             this.gChannelToolStripMenuItem,
             this.bChannelToolStripMenuItem,
-            this.convertToGrayscaleToolStripMenuItem});
+            this.convertToGrayscaleToolStripMenuItem,
+            this.erosionToolStripMenuItem,
+            this.dilationToolStripMenuItem});
             this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
             this.operationsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.operationsToolStripMenuItem.Text = "Operations";
@@ -147,6 +151,20 @@
             this.convertToGrayscaleToolStripMenuItem.Text = "Convert to grayscale";
             this.convertToGrayscaleToolStripMenuItem.Click += new System.EventHandler(this.convertToGrayscaleToolStripMenuItem_Click);
             // 
+            // erosionToolStripMenuItem
+            // 
+            this.erosionToolStripMenuItem.Name = "erosionToolStripMenuItem";
+            this.erosionToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.erosionToolStripMenuItem.Text = "Erosion";
+            this.erosionToolStripMenuItem.Click += new System.EventHandler(this.erosionToolStripMenuItem_Click);
+            // 
+            // dilationToolStripMenuItem
+            // 
+            this.dilationToolStripMenuItem.Name = "dilationToolStripMenuItem";
+            this.dilationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.dilationToolStripMenuItem.Text = "Dilation";
+            this.dilationToolStripMenuItem.Click += new System.EventHandler(this.dilationToolStripMenuItem_Click);
+            // 
             // chromaticModelsToolStripMenuItem
             // 
             this.chromaticModelsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -162,6 +180,13 @@
             this.rGBToYCbYCrToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.rGBToYCbYCrToolStripMenuItem.Text = "RGB to YCbYCr";
             this.rGBToYCbYCrToolStripMenuItem.Click += new System.EventHandler(this.rGBToYCbYCrToolStripMenuItem_Click);
+            // 
+            // yCbYrToRGBToolStripMenuItem
+            // 
+            this.yCbYrToRGBToolStripMenuItem.Name = "yCbYrToRGBToolStripMenuItem";
+            this.yCbYrToRGBToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.yCbYrToRGBToolStripMenuItem.Text = "YCbYr to RGB";
+            this.yCbYrToRGBToolStripMenuItem.Click += new System.EventHandler(this.yCbYrToRGBToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -255,13 +280,6 @@
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // yCbYrToRGBToolStripMenuItem
-            // 
-            this.yCbYrToRGBToolStripMenuItem.Name = "yCbYrToRGBToolStripMenuItem";
-            this.yCbYrToRGBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.yCbYrToRGBToolStripMenuItem.Text = "YCbYr to RGB";
-            this.yCbYrToRGBToolStripMenuItem.Click += new System.EventHandler(this.yCbYrToRGBToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,6 +331,8 @@
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem yCbYrToRGBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem erosionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dilationToolStripMenuItem;
     }
 }
 

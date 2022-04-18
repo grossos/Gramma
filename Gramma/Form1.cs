@@ -8,14 +8,14 @@ namespace Gramma
 {
     public partial class Form1 : Form
     {
-        Bitmap myimage;
+        Bitmap myimage, initial_image;
         Bitmap binaryimage;
-        Operations channel_seperation = new Operations();
+        Operations operations = new Operations();
         Binarize binarize = new Binarize();
         Models models = new Models();
         Filters filters = new Filters();
         YcbcrForm ycbcr_components = new YcbcrForm();
-        RGBForm rgb_components = new RGBForm(); 
+        RGBForm rgb_components = new RGBForm();
         public Form1()
         {
            
@@ -38,6 +38,7 @@ namespace Gramma
                 {
                     myimage = new Bitmap(open.FileName);
                     pictureBox1.Image = myimage;
+                    initial_image = myimage;
                 }
             }
             catch (Exception)
@@ -49,28 +50,28 @@ namespace Gramma
         private void rChannelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-            channel_seperation.monocolor(myimage, 0); // r channel
+            operations.monocolor(myimage, 0); // r channel
             pictureBox1.Image = myimage;
             pictureBox1.Refresh();
         }
 
         private void gChannelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            channel_seperation.monocolor(myimage, 1); // r channel
+            operations.monocolor(myimage, 1); // r channel
             pictureBox1.Image = myimage;
             pictureBox1.Refresh();
         }
 
         private void bChannelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            channel_seperation.monocolor(myimage, 2); // r channel
+            operations.monocolor(myimage, 2); // r channel
             pictureBox1.Image = myimage;
             pictureBox1.Refresh();
         }
 
         private void convertToGrayscaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            channel_seperation.grayscale(myimage);
+            operations.grayscale(myimage);
             pictureBox1.Refresh();
         }
  
@@ -196,6 +197,20 @@ namespace Gramma
 
             //pictureBox1.Image = ycbcrimage;
             rgb_components.Show();
+        }
+
+        private void erosionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            operations.erosion(myimage);
+            pictureBox1.Image=myimage;
+            pictureBox1.Refresh();
+        }
+
+        private void dilationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            operations.dilation(myimage);
+            pictureBox1.Image = myimage;
+            pictureBox1.Refresh();
         }
     }
 }
