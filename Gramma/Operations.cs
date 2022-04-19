@@ -111,7 +111,7 @@ namespace Gramma
             }
             bmp.UnlockBits(bmData);
             source.UnlockBits(bmData2);
-            source.Dispose();
+            //source.Dispose();
         }
 
         public void dilation(Bitmap bmp)
@@ -157,7 +157,7 @@ namespace Gramma
             }
             bmp.UnlockBits(bmData);
             source.UnlockBits(bmData2);
-            source.Dispose();
+            //source.Dispose();
         }
     }
 }

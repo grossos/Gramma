@@ -199,5 +199,56 @@ namespace Gramma
             image.UnlockBits(bmData);
             result_image.UnlockBits(copyData);
         }
+        
+        public void highpass_filter(Bitmap image, Bitmap result_image)
+        {
+            // read image 
+            BitmapData bmData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
+            ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData copyData = result_image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
+            ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            int width = image.Width;
+            int height = image.Height;
+            int stride = bmData.Stride;
+            System.IntPtr Scan0 = bmData.Scan0;
+            System.IntPtr Scan1 = copyData.Scan0;
+
+            unsafe
+            {
+                byte* p = (byte*)(void*)Scan0;
+                byte* p2 = (byte*)(void*)Scan1;
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        int i = y * stride + x * 3;
+
+                        if (x == 0 || y == 0 || x == width - 1 || y == height - 1)
+                        {
+                            p2[i] = p[i];
+                            p2[i + 1] = p[i + 1];
+                            p2[i + 2] = p[i + 2];
+                        }
+                        else
+                        {
+                            p2[i] = (byte)((p[(y - 1) * stride + (x - 1) * 3] *-1 + p[(y - 1) * stride + x * 3] * -1 + p[(y - 1) * stride + (x + 1) * 3] * -1 +
+                                p[(y) * stride + (x - 1) * 3] * -1 + p[(y) * stride + x * 3] *8 + p[(y) * stride + (x + 1) * 3] * -1 +
+                                p[(y + 1) * stride + (x - 1) * 3] * -1 + p[(y + 1) * stride + x * 3] * -1 + p[(y + 1) * stride + (x + 1) * 3] * -1) / 9);
+
+                            p2[i + 1] = (byte)((p[(y - 1) * stride + (x - 1) * 3 + 1] * -1 + p[(y - 1) * stride + x * 3 + 1] * -1 + p[(y - 1) * stride + (x + 1) * 3 + 1] * -1 +
+                                p[(y) * stride + (x - 1) * 3 + 1] * -1 + p[(y) * stride + x * 3 + 1] * 8 + p[(y) * stride + (x + 1) * 3 + 1] * -1 +
+                                p[(y + 1) * stride + (x - 1) * 3 + 1] * -1 + p[(y + 1) * stride + x * 3 + 1] * -1 + p[(y + 1) * stride + (x + 1) * 3 + 1] * -1) / 9);
+
+                            p2[i + 2] = (byte)((p[(y - 1) * stride + (x - 1) * 3 + 2] * -1 + p[(y - 1) * stride + x * 3 + 2] * -1 + p[(y - 1) * stride + (x + 1) * 3 + 2] * -1 +
+                                p[(y) * stride + (x - 1) * 3 + 2] * -1 + p[(y) * stride + x * 3 + 2] * 8 + p[(y) * stride + (x + 1) * 3 + 2] * -1 +
+                                p[(y + 1) * stride + (x - 1) * 3 + 2] * -1 + p[(y + 1) * stride + x * 3 + 2] * -1 + p[(y + 1) * stride + (x + 1) * 3 + 2] * -1) / 9);
+                        }
+                    }
+                }
+            }
+            image.UnlockBits(bmData);
+            result_image.UnlockBits(copyData);
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace Gramma
         Filters filters = new Filters();
         YcbcrForm ycbcr_components = new YcbcrForm();
         RGBForm rgb_components = new RGBForm();
+        HistogramForm histogram_form = new HistogramForm();   
         public Form1()
         {
            
@@ -38,7 +39,8 @@ namespace Gramma
                 {
                     myimage = new Bitmap(open.FileName);
                     pictureBox1.Image = myimage;
-                    initial_image = myimage;
+                    initial_image = (Bitmap)myimage.Clone();
+                    button1.Visible = true;
                 }
             }
             catch (Exception)
@@ -72,6 +74,7 @@ namespace Gramma
         private void convertToGrayscaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             operations.grayscale(myimage);
+            pictureBox1.Image = myimage;
             pictureBox1.Refresh();
         }
  
@@ -182,21 +185,21 @@ namespace Gramma
 
         private void yCbYrToRGBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Bitmap yimage = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
-            Bitmap cbimage = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
-            Bitmap crimage = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
-            Bitmap ycbcrimage = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
+            //Bitmap yimage = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
+            //Bitmap cbimage = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
+            //Bitmap crimage = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
+            //Bitmap ycbcrimage = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
 
 
-            models.ycbcr_to_rgb(myimage, yimage, cbimage, crimage, ycbcrimage);
+            //models.ycbcr_to_rgb(myimage, yimage, cbimage, crimage, ycbcrimage);
 
-            rgb_components.pictureBox1.Image = yimage;
-            rgb_components.pictureBox2.Image = cbimage;
-            rgb_components.pictureBox3.Image = crimage;
-            rgb_components.pictureBox4.Image = ycbcrimage;
+            //rgb_components.pictureBox1.Image = yimage;
+            //rgb_components.pictureBox2.Image = cbimage;
+            //rgb_components.pictureBox3.Image = crimage;
+            //rgb_components.pictureBox4.Image = ycbcrimage;
 
-            //pictureBox1.Image = ycbcrimage;
-            rgb_components.Show();
+            ////pictureBox1.Image = ycbcrimage;
+            //rgb_components.Show();
         }
 
         private void erosionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -204,6 +207,64 @@ namespace Gramma
             operations.erosion(myimage);
             pictureBox1.Image=myimage;
             pictureBox1.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = initial_image;
+            pictureBox1.Refresh();
+        }
+
+        private void highpassFilterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap copy = new Bitmap(myimage.Width, myimage.Height, PixelFormat.Format24bppRgb);
+            filters.highpass_filter(myimage, copy);
+            myimage = copy;
+            pictureBox1.Image = myimage;
+            pictureBox1.Refresh();
+        }
+
+        private void erosionToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            operations.erosion(myimage);
+            pictureBox1.Image = myimage;
+            pictureBox1.Refresh();
+        }
+
+        private void dilationToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            operations.dilation(myimage);
+            pictureBox1.Image = myimage;
+            pictureBox1.Refresh();
+        }
+
+        private void openingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            operations.erosion(myimage);
+            operations.dilation(myimage);
+            pictureBox1.Image = myimage;
+            pictureBox1.Refresh();
+        }
+
+        private void closingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            operations.dilation(myimage);
+            operations.erosion(myimage);            
+            pictureBox1.Image = myimage;
+            pictureBox1.Refresh();
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void histogramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            histogram_form = new HistogramForm();
+            histogram_form.grayscale_image = myimage;
+            histogram_form.ShowDialog();
+            
         }
 
         private void dilationToolStripMenuItem_Click(object sender, EventArgs e)

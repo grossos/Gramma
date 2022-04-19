@@ -15,7 +15,6 @@ namespace Gramma
             int height = image.Height;
             int stride = bmData.Stride;
             System.IntPtr Scan0 = bmData.Scan0;
-            Console.WriteLine(stride);
 
             unsafe
             {
