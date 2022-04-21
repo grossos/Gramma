@@ -204,14 +204,16 @@ namespace Gramma
 
         private void erosionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            operations.erosion(myimage);
+            filters.erosion(myimage);
             pictureBox1.Image=myimage;
             pictureBox1.Refresh();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = initial_image;
+            pictureBox1.Image = null;
+            button1.Visible = false;
+            //pictureBox1.Image = initial_image;
             pictureBox1.Refresh();
         }
 
@@ -226,30 +228,30 @@ namespace Gramma
 
         private void erosionToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            operations.erosion(myimage);
+            filters.erosion(myimage);
             pictureBox1.Image = myimage;
             pictureBox1.Refresh();
         }
 
         private void dilationToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            operations.dilation(myimage);
+            filters.dilation(myimage);
             pictureBox1.Image = myimage;
             pictureBox1.Refresh();
         }
 
         private void openingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            operations.erosion(myimage);
-            operations.dilation(myimage);
+            filters.erosion(myimage);
+            filters.dilation(myimage);
             pictureBox1.Image = myimage;
             pictureBox1.Refresh();
         }
 
         private void closingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            operations.dilation(myimage);
-            operations.erosion(myimage);            
+            filters.dilation(myimage);
+            filters.erosion(myimage);            
             pictureBox1.Image = myimage;
             pictureBox1.Refresh();
         }
@@ -267,12 +269,9 @@ namespace Gramma
             
         }
 
-        private void dilationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            operations.dilation(myimage);
-            pictureBox1.Image = myimage;
-            pictureBox1.Refresh();
-        }
+        
+
+       
     }
 }
     
